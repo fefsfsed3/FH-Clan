@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FH Clan</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/@react-three/fiber@8.15.11/dist/index.umd.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; background: #000; color: #fff; font-family: Arial, sans-serif; }
+        .silk-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .nav { display: flex; justify-content: center; padding: 40px 0; }
+        .tab { background: transparent; border: none; color: #888; padding: 15px 30px; cursor: pointer; font-size: 18px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; margin: 0 10px; }
+        .tab:hover { color: #dc2626; transform: translateY(-2px); }
+        .tab.active { color: #dc2626; }
+        .tab-content { display: none; padding: 40px 0; text-align: center; min-height: 70vh; }
+        .tab-content.active { display: block; }
+        .main-title { font-size: 6rem; font-weight: bold; margin: 60px 0 20px; background: linear-gradient(45deg, #ffffff, #f8fafc, #e2e8f0, #ffffff); background-size: 400% 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shine 3s ease-in-out infinite; }
+        .subtitle { font-size: 2rem; color: #ccc; margin-bottom: 40px; letter-spacing: 2px; }
+        .page-title { font-size: 4rem; font-weight: bold; margin: 40px 0; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; }
+        .big-text { font-size: 1.5rem; line-height: 1.8; margin: 40px 0; color: #e5e5e5; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .discord-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(45deg, #dc2626, #b91c1c); color: white; padding: 15px 30px; border: none; border-radius: 50px; font-size: 1.2rem; font-weight: bold; text-decoration: none; cursor: pointer; transition: all 0.3s ease; margin: 40px auto; }
+        .discord-btn:hover { transform: translateY(-3px) scale(1.05); background: linear-gradient(45deg, #b91c1c, #991b1b); }
+        @keyframes shine { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    </style>
+</head>
+<body>
+    <canvas id="silk-canvas" class="silk-bg"></canvas>
+    
+    <div class="content">
+        <nav class="nav">
+            <button class="tab active" onclick="showTab('home')">Home</button>
+            <button class="tab" onclick="showTab('information')">Information</button>
+            <button class="tab" onclick="showTab('scripter')">Scripter</button>
+        </nav>
+
+        <div id="home" class="tab-content active">
+            <h1 class="main-title">FH CLAN</h1>
+            <p class="subtitle">#1 FTAP Clan</p>
+        </div>
+
+        <div id="information" class="tab-content">
+            <h2 class="page-title">Information</h2>
+            <p class="big-text">
+                We are the #1 FTAP Clan. With our amazing skills at coding/pvping, we can finish off every clan we encounter, no matter what.
+            </p>
+            <p class="big-text">
+                We have Executor allys for our clan to support us. You can get more information in our discord server.
+            </p>
+            <a href="https://discord.gg/VsEQmQDedC" class="discord-btn" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+                Join FH
+            </a>
+        </div>
+
+        <div id="scripter" class="tab-content">
+            <h2 class="page-title">Scripters/Coders</h2>
+            <p class="big-text">
+                Our coding skill is incredible, our scripters can almost build anything. Executors, game engines, games and more.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('silk-canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+        if (!gl) {
+            console.error('WebGL not supported');
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+        }
+
+        const vertexShaderSource = `
+            attribute vec2 a_position;
+            varying vec2 vUv;
+            void main() {
+                vUv = a_position * 0.5 + 0.5;
+                gl_Position = vec4(a_position, 0.0, 1.0);
+            }
+        `;
+
+        const fragmentShaderSource = `
+            precision mediump float;
+            varying vec2 vUv;
+            uniform float uTime;
+            uniform vec2 uResolution;
+
+            const float e = 2.71828182845904523536;
+
+            float noise(vec2 texCoord) {
+                float G = e;
+                vec2 r = (G * sin(G * texCoord));
+                return fract(r.x * r.y * (1.0 + texCoord.x));
+            }
+
+            void main() {
+                float rnd = noise(gl_FragCoord.xy);
+                vec2 uv = vUv;
+                vec2 tex = uv;
+                float tOffset = 5.0 * uTime;
+
+                tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
+
+                float pattern = 0.6 + 0.4 * sin(5.0 * (tex.x + tex.y + cos(3.0 * tex.x + 5.0 * tex.y) + 0.02 * tOffset) + sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
+
+                vec3 color = vec3(0.86, 0.15, 0.15) * pattern - rnd / 15.0 * 10.0;
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `;
+
+        function createShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+            return shader;
+        }
+
+        function createProgram(gl, vertexShader, fragmentShader) {
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error('Program link error:', gl.getProgramInfoLog(program));
+                gl.deleteProgram(program);
+                return null;
+            }
+            return program;
+        }
+
+        const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+        const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+        const program = createProgram(gl, vertexShader, fragmentShader);
+
+        const positionAttributeLocation = gl.getAttribLocation(program, 'a_position');
+        const timeUniformLocation = gl.getUniformLocation(program, 'uTime');
+        const resolutionUniformLocation = gl.getUniformLocation(program, 'uResolution');
+
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        const positions = [-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1];
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function render(time) {
+            time *= 0.001;
+
+            gl.clearColor(0, 0, 0, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+            gl.useProgram(program);
+
+            gl.enableVertexAttribArray(positionAttributeLocation);
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+            gl.uniform1f(timeUniformLocation, time);
+            gl.uniform2f(resolutionUniformLocation, canvas.width, canvas.height);
+
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+            requestAnimationFrame(render);
+        }
+
+        requestAnimationFrame(render);
+
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+</body>
+</html>
